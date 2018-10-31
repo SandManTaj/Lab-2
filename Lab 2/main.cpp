@@ -7,8 +7,38 @@ using namespace std;
 
 int rootCeiling(int n)
 {
-	double x = sqrt(n);
-	return ceil(x);
+	int split;
+	split = n / 2;
+	int left = 0;
+	int right = n;
+	int ret = 0;
+	while (left <= right)
+	{
+
+		if ((split * split) == n)
+		{
+			return split;
+		}
+
+		if ((split * split) < n)
+		{
+			left = split;
+			split = ceil(double(left + right) / double(2));
+			ret = split;
+		}
+		else if ((split * split) > n)
+		{
+			right = split;
+			split = floor(double(left + right) / double(2));
+			ret = split;
+		}
+		if (right - left == 1)
+		{
+			return right;
+		}
+
+	}
+	return ret;
 }
 
 int binarySearch(vector<int> arr)
